@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="tr" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Darktalk - Rastgele Sesli Dil Pratiği</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        darkbg: '#0f172a',
+                        cardbg: '#1e293b',
+                        neonpurple: '#8b5cf6',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-darkbg text-white h-screen flex flex-col justify-between font-sans">
+
+    <!-- Üst Menü -->
+    <header class="p-6 flex justify-between items-center border-b border-slate-800">
+        <div class="flex items-center space-x-2">
+            <span class="text-2xl font-black tracking-wider text-neonpurple">DARK<span class="text-white">TALK</span></span>
+        </div>
+        <div id="user-status" class="text-sm text-slate-400 bg-slate-800 px-3 py-1.5 rounded-full">
+            🔴 Çevrimdışı
+        </div>
+    </header>
+
+    <!-- Ana İçerik Alanı -->
+    <main class="flex-1 flex flex-col items-center justify-center p-4">
+        
+        <!-- 1. Aşama: Dil Seçim ve Giriş Paneli -->
+        <div id="setup-panel" class="w-full max-w-md bg-cardbg p-8 rounded-2xl shadow-2xl border border-slate-800 space-y-6">
+            <h2 class="text-xl font-bold text-center">Pratik Yapmaya Başla</h2>
+            
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-xs uppercase tracking-wider text-slate-400 mb-2">Ana Dilim</label>
+                    <select id="native-lang" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 text-white focus:outline-none focus:border-neonpurple">
+                        <option value="tr">🇹🇷 Türkçe</option>
+                        <option value="en">🇺🇸 English</option>
+                        <option value="es">🇪🇸 Español</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-xs uppercase tracking-wider text-slate-400 mb-2">Öğrenmek İstediğim Dil</label>
+                    <select id="target-lang" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 text-white focus:outline-none focus:border-neonpurple">
+                        <option value="en">🇺🇸 English</option>
+                        <option value="tr">🇹🇷 Türkçe</option>
+                        <option value="es">🇪🇸 Español</option>
+                        <option value="de">🇩🇪 Deutsch</option>
+                    </select>
+                </div>
+            </div>
+
+            <button onclick="startMatching()" class="w-full bg-neonpurple hover:bg-purple-700 transition font-bold py-4 rounded-xl shadow-lg shadow-purple-900/30 text-lg">
+                Eşleşme Ara
+            </button>
+        </div>
+
+        <!-- 2. Aşama: Arama / Bekleme Ekranı -->
+        <div id="searching-panel" class="hidden flex-col items-center space-y-6">
+            <div class="relative flex items-center justify-center">
+                <div class="absolute w-32 h-32 bg-neonpurple/20 rounded-full animate-ping"></div>
+                <div class="w-20 h-20 bg-neonpurple rounded-full flex items-center justify-center text-3xl shadow-xl">
+                    🎙️
+                </div>
+            </div>
+            <p class="text-slate-400 text-lg font-medium animate-pulse">Küresel havuzda konuşma partneri aranıyor...</p>
+            <button onclick="cancelSearch()" class="text-sm text-red-400 hover:underline">Vazgeç</button>
+        </div>
+
+        <!-- 3. Aşama: Canlı Görüşme Ekranı -->
+        <div id="call-panel" class="hidden flex-col items-center space-y-8 w-full max-w-md bg-cardbg p-8 rounded-2xl border border-slate-800 text-center">
+            <div class="w-24 h-24 bg-slate-800 rounded-full flex items-center justify-center text-4xl border-2 border-neonpurple">
+                🗣️
+            </div>
+            <div>
+                <h3 class="text-lg font-semibold text-slate-200">Bağlantı Kuruldu!</h3>
+                <p id="timer" class="text-3xl font-mono font-bold text-neonpurple mt-2">05:00</p>
+            </div>
+            
+            <div class="bg-slate-90
